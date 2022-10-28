@@ -66,26 +66,32 @@ namespace DataLayer
 
         public bool UpdateCategory(int id, string name, string description)
         {
-            using var db = new NorthwindContext();
-            var categoryToUpdate = db.Categories.Find(id);
-            
-            
-            if (categoryToUpdate != null)
-            {
-                //set new category values
-                categoryToUpdate.Name = name;
-                categoryToUpdate.Description = description;
-                //upate category 
-                db.Categories.Update(categoryToUpdate);
-                db.SaveChanges();
-
-                return true;
-            }
-            else
+            if (id <= 0)
             {
                 return false;
             }
-           
+            else
+            {
+                using var db = new NorthwindContext();
+                var categoryToUpdate = db.Categories.Find(id);
+
+
+                if (categoryToUpdate != null)
+                {
+                    //set new category values
+                    categoryToUpdate.Name = name;
+                    categoryToUpdate.Description = description;
+                    //upate category 
+                    db.Categories.Update(categoryToUpdate);
+                    db.SaveChanges();
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
 }

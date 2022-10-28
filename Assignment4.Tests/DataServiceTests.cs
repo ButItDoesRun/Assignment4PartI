@@ -83,7 +83,7 @@ namespace Assignment4.Tests
             // cleanup
             service.DeleteCategory(category.Id);
         }
-#if COMMENT
+
         [Fact]
         public void UpdateCategory_InvalidID_ReturnsFalse()
         {
@@ -105,7 +105,7 @@ namespace Assignment4.Tests
             Assert.Null(product.QuantityPerUnit);
             Assert.Equal(0, product.UnitsInStock);
         }
-
+#if COMMENT
         [Fact]
         public void GetProduct_ValidId_ReturnsProductWithCategory()
         {
