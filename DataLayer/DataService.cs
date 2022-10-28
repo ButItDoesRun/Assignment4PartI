@@ -77,8 +77,8 @@ namespace DataLayer
                 categoryToUpdate.Description = description;
                 //upate category 
                 db.Categories.Update(categoryToUpdate);
+                db.SaveChanges();
 
-            db.SaveChanges();
                 return true;
             }
             else
