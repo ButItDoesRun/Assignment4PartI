@@ -3,6 +3,7 @@ using DataLayer.Model;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
+using System.Linq;
 
 namespace DataLayer
 {
@@ -92,6 +93,37 @@ namespace DataLayer
                     return false;
                 }
             }
+        }
+
+
+        public Product? GetProduct(int id)
+        {
+            using var db = new NorthwindContext();
+            var product = db.Products.Include(x => x.Category).FirstOrDefault(x => x.Id == id);
+                     
+            return product;
+        }
+
+
+      
+
+        public IList<ProductModel> GetProductByCategory(int categoryId)
+        {
+            using var db = new NorthwindContext();
+
+            var productList = db.Products.Include(x => x.Category).Where(x => x.CategoryId == categoryId);
+            List<ProductModel> products = new List<ProductModel>();
+
+            foreach(var product in productList)
+            {
+                ProductModel model = new ProductModel();
+                model.Id = product.Id;
+                model.Name = product.Name;
+                model.CategoryName = product.Category.Name;
+                products.Add(model);
+            }
+
+            return products.ToList();
         }
     }
 }
