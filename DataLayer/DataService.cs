@@ -203,10 +203,24 @@ namespace DataLayer
             return orders;
         }
 
-        
 
+        public IList<OrderDetails> GetOrderDetailsByProductId(int productId)
+        {
+            using var db = new NorthwindContext();
+            var orders = new List<OrderDetails>();
 
+            foreach (var ordrDetail in db.OrderDetails
+                .Where(x => x.ProductId == productId)
+                .Include(x => x.Order)
+                .Include(x => x.Product)
+                .ThenInclude(x => x.Category)
+                .OrderBy(x => x.UnitPrice))
+            {
+                orders.Add(ordrDetail);
+            }
 
+            return orders;
+        }
 
     }
 }
