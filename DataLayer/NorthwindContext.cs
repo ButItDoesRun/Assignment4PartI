@@ -14,8 +14,7 @@ namespace DataLayer
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductModel> ProductModels { get; set; }
-
+      
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -44,10 +43,7 @@ namespace DataLayer
             modelBuilder.Entity<Product>().Property(x => x.UnitPrice).HasColumnName("unitprice");
             modelBuilder.Entity<Product>().Property(x => x.UnitsInStock).HasColumnName("unitsinstock");
 
-            //ProductModel class
-            //modelBuilder.Entity<ProductModel>().ToTable("products");
-            //modelBuilder.Entity<ProductModel>().Property(x => x.productName).HasColumnName("productname");
-            //modelBuilder.Entity<ProductModel>().Property(x => x.categoryName).HasColumnName("categoryname");
+            
 
 
 

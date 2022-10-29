@@ -125,7 +125,7 @@ namespace Assignment4.Tests
             Assert.Equal("Beverages", products.First().CategoryName);
             Assert.Equal("Lakkalikööri", products.Last().Name);
         }
-#if COMMENT
+
         [Fact]
         public void GetProduct_NameSubString_ReturnsProductsThatMatchesTheSubString()
         {
@@ -148,7 +148,7 @@ namespace Assignment4.Tests
             Assert.Null(order.ShipName);
             Assert.Null(order.ShipCity);
         }
-
+#if COMMENT
         [Fact]
         public void GetOrder_ValidId_ReturnsCompleteOrder()
         {

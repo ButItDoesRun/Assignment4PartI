@@ -128,8 +128,29 @@ namespace DataLayer
             return products;
         }
 
+        public IList<ProductModel> GetProductByName(string name)
+        {
+            using var db = new NorthwindContext();
+            List<ProductModel> products = new List<ProductModel>();
+        
+            foreach (var product in db
+                .Products
+                .Include(x => x.Category)
+                .Where(x => x.Name.Contains(name))
+                )
+            {
+                ProductModel productFound = new ProductModel();
+                productFound.Id = product.Id;
+                productFound.ProductName = product.Name;
+                productFound.CategoryName = product.Category.Name;
+                products.Add(productFound);
+            }
 
-       
-       
+            return products;
+        }
+
+
+
+
     }
 }
