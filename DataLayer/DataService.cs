@@ -150,7 +150,45 @@ namespace DataLayer
         }
 
 
+        public Order GetOrder(int orderId)
+        {
+            using var db = new NorthwindContext();
+            Order order = new Order();
 
+
+            foreach(var findOrder in db.Orders
+                .Where(x => x.Id == orderId)
+                .Include(x => x.OrderDetails)
+                .ThenInclude(x => x.Product)
+                .ThenInclude(x => x.Category))
+            {
+                order = findOrder;
+            }
+
+
+            return order;
+        }
+
+        
+        public IList<Order> GetOrders()
+        {
+            using var db = new NorthwindContext();
+            IList<Order> orders = new List<Order>();
+
+            foreach(var order in db.Orders
+                .Include(x => x.OrderDetails)
+                .ThenInclude(x => x.Product)
+                .ThenInclude(x => x.Category))
+            {
+                Order ordr = new Order();
+                orders.Add(ordr);
+
+            }
+            return orders;
+        }
+
+
+       
 
     }
 }

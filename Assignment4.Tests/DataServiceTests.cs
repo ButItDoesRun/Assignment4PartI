@@ -148,7 +148,7 @@ namespace Assignment4.Tests
             Assert.Null(order.ShipName);
             Assert.Null(order.ShipCity);
         }
-#if COMMENT
+
         [Fact]
         public void GetOrder_ValidId_ReturnsCompleteOrder()
         {
@@ -203,6 +203,6 @@ namespace Assignment4.Tests
             Assert.Equal(14, orderDetails.First().UnitPrice);
             Assert.Equal(12, orderDetails.First().Quantity);
         }
-#endif
+// #if COMMENT #endif
     }
 }
