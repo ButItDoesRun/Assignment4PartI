@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
 using System.Linq;
+using System.Text;
+using System;
 
 namespace DataLayer
 {
@@ -111,7 +113,7 @@ namespace DataLayer
         {
             using var db = new NorthwindContext();
 
-            var productList = db.Products.Include(x => x.Category).Where(x => x.CategoryId == categoryId);
+            var productList = db.Products.Include(x => x.Category).Where(x => x.CategoryId == categoryId).ToList();
             List<ProductModel> products = new List<ProductModel>();
 
             foreach(var product in productList)
@@ -123,7 +125,11 @@ namespace DataLayer
                 products.Add(model);
             }
 
-            return products.ToList();
+            return products;
         }
+
+
+       
+       
     }
 }
